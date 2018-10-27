@@ -239,7 +239,7 @@ namespace Server::Stats
 		writer.Key("variant");
 		writer.String(Utils::String::ThinString(variantName).c_str());
 
-		if (variantType >= 0 && variantType < Blam::GameTypeCount)
+		if (variantType >= 0 && variantType < Blam::eGameTypeCount)
 		{
 			writer.Key("variantType");
 			writer.String(Blam::GameTypeNames[variantType].c_str());
@@ -464,7 +464,7 @@ namespace Server::Stats
 		return true;
 	}
 
-	void LifeCycleStateChanged(Blam::Network::LifeCycleState newState)
+	void LifeCycleStateChanged(Blam::LifeCycleState newState)
 	{
 		auto* session = Blam::Network::GetActiveSession();
 		
@@ -473,7 +473,7 @@ namespace Server::Stats
 
 		switch (newState)
 		{
-			case Blam::Network::eLifeCycleStateStartGame:
+			case Blam::eLifeCycleStateStartGame:
 			{
 				auto thread = CreateThread(NULL, 0, GetPlayersInfo_Thread, (LPVOID)"", 0, NULL);
 				break;
